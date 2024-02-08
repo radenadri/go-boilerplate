@@ -8,6 +8,19 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// GetUsers godoc
+// @Summary      List all users
+// @Description  Get a list of all users
+// @Tags         User
+// @Accept       json
+// @Headers      Content-Type application/json
+// @Produce      json
+// @Security	 ApiKeyAuth
+// @Success      200  {array}   models.User
+// @Failure      400  {object}  utils.Response
+// @Failure      404  {object}  utils.Response
+// @Failure      500  {object}  utils.Response
+// @Router       /users [get]
 func GetUsers(c *fiber.Ctx) error {
 	// Get users
 	var users []models.User
@@ -20,6 +33,20 @@ func GetUsers(c *fiber.Ctx) error {
 	})
 }
 
+// GetUser godoc
+// @Summary      Get user
+// @Description  Get user by ID
+// @Tags         User
+// @Param        id   path      int  true  "User ID"
+// @Accept       json
+// @Headers      Content-Type application/json
+// @Produce      json
+// @Security	 ApiKeyAuth
+// @Success      200  {array}   models.User
+// @Failure      400  {object}  utils.Response
+// @Failure      404  {object}  utils.Response
+// @Failure      500  {object}  utils.Response
+// @Router       /users/{id} [get]
 func GetUser(c *fiber.Ctx) error {
 	// Get user
 	var user models.User

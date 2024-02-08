@@ -5,9 +5,31 @@ import (
 	pg "boilerplate/app/db"
 	"boilerplate/app/middlewares"
 	"boilerplate/routes"
+
 	"github.com/gofiber/fiber/v2"
 )
 
+// @title           Go Fiber + Gorm Boilerplate
+// @version         1.0
+// @description     This is an example for endpoints list.
+// @termsOfService  http://swagger.io/terms/
+
+// @contact.name   API Support
+// @contact.url    http://www.swagger.io/support
+// @contact.email  support@swagger.io
+
+// @license.name  Apache 2.0
+// @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host      localhost:8080
+// @BasePath  /api/v1
+
+// @externalDocs.description  OpenAPI
+// @externalDocs.url          https://swagger.io/resources/open-api/
+
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
 func main() {
 
 	// Init database
@@ -31,6 +53,9 @@ func main() {
 
 	// Enable logger
 	app.Use(middlewares.Logger())
+
+	// Enable Swagger
+	app.Use(middlewares.Swagger())
 
 	// Create route for "/"
 	app.Get("/", func(c *fiber.Ctx) error {

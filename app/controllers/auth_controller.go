@@ -13,6 +13,19 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+// Login godoc
+// @Summary      Perform login
+// @Description  Login with email and password
+// @Tags         Auth
+// @Accept       json
+// @Headers      Content-Type application/json
+// @Produce      json
+// @Param        request body models.LoginRequest true "Login request"
+// @Success      200  {array}   models.LoginResponse
+// @Failure      400  {object}  utils.Response
+// @Failure      404  {object}  utils.Response
+// @Failure      500  {object}  utils.Response
+// @Router       /login [post]
 func Login(c *fiber.Ctx) error {
 	// Get and parse user input
 	loginRequest := new(models.LoginRequest)
@@ -70,6 +83,19 @@ func Login(c *fiber.Ctx) error {
 	})
 }
 
+// Register godoc
+// @Summary      Attempt register
+// @Description  Register to the system
+// @Tags         Auth
+// @Accept       json
+// @Headers      Content-Type application/json
+// @Produce      json
+// @Param        request body models.RegisterRequest true "Register request"
+// @Success      200  {array}   models.User
+// @Failure      400  {object}  utils.Response
+// @Failure      404  {object}  utils.Response
+// @Failure      500  {object}  utils.Response
+// @Router       /register [post]
 func Register(c *fiber.Ctx) error {
 	// Get and parse user input
 	registerRequest := new(models.RegisterRequest)
@@ -124,6 +150,19 @@ func Register(c *fiber.Ctx) error {
 	})
 }
 
+// Profile godoc
+// @Summary      Get profile
+// @Description  Get current user profile
+// @Tags         Auth
+// @Accept       json
+// @Headers      Content-Type application/json
+// @Produce      json
+// @Security	 ApiKeyAuth
+// @Success      200  {array}   models.User
+// @Failure      400  {object}  utils.Response
+// @Failure      404  {object}  utils.Response
+// @Failure      500  {object}  utils.Response
+// @Router       /me [get]
 func Profile(c *fiber.Ctx) error {
 	// Get header "Authorization"
 	auth := c.Request().Header.Peek("Authorization")
@@ -162,6 +201,20 @@ func Profile(c *fiber.Ctx) error {
 	})
 }
 
+// UpdateProfile godoc
+// @Summary      Update profile
+// @Description  Update current user profile
+// @Tags         Auth
+// @Accept       json
+// @Headers      Content-Type application/json
+// @Produce      json
+// @Security	 ApiKeyAuth
+// @Param        request body models.UpdateUserRequest true "Update profile request"
+// @Success      200  {array}   models.User
+// @Failure      400  {object}  utils.Response
+// @Failure      404  {object}  utils.Response
+// @Failure      500  {object}  utils.Response
+// @Router       /me [put]
 func UpdateProfile(c *fiber.Ctx) error {
 	// Get header "Authorization"
 	auth := c.Request().Header.Peek("Authorization")
