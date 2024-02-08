@@ -19,40 +19,5 @@ build: clean test
 run: swag build
 	$(BUILD_DIR)/$(APP_NAME)
 
-docker.run: docker.network docker.postgres swag docker.fiber migrate.up
-
-docker.network:
-	docker network inspect dev-network >/dev/null 2>&1 || \
-	docker network create -d bridge dev-network
-
-docker.fiber.build:
-	docker build -t fiber .
-
-docker.fiber: docker.fiber.build
-	docker run --rm -d \
-		--name dev-fiber \
-		--network dev-network \
-		-p 5000:5000 \
-		fiber
-
-docker.postgres:
-	docker run --rm -d \
-		--name dev-postgres \
-		--network dev-network \
-		-e POSTGRES_USER=postgres \
-		-e POSTGRES_PASSWORD=password \
-		-e POSTGRES_DB=postgres \
-		-v ${HOME}/dev-postgres/data/:/var/lib/postgresql/data \
-		-p 5432:5432 \
-		postgres
-
-docker.stop: docker.stop.fiber docker.stop.postgres
-
-docker.stop.fiber:
-	docker stop dev-fiber
-
-docker.stop.postgres:
-	docker stop dev-postgres
-
 swag:
 	swag init --parseDependency --parseInternal
