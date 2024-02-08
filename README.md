@@ -109,12 +109,7 @@ JWT_SECRET="t3st1234"
 
 ## 🔨 Docker development
 
-- Install **`docker`**, **`docker-compose`** & **`golang-migrate`**
-- Rename `.env.example` to `.env`
-- Start db container `docker-compose up db`
-- Run migrations `make migrate.up`
-- Now start api server with hot reloading `make docker.dev`
-- Visit **`http://localhost:5000`** or **`http://localhost:5000/swagger/`**
+### Coming Soon
 
 ## 🔨 Local Development
 
@@ -133,7 +128,7 @@ JWT_SECRET="t3st1234"
   make run
   ```
 
-- Visit **`http://localhost:5000`** or **`http://localhost:5000/swagger/`**
+- Visit **`http://localhost:5000/api/v1/swagger`** for the API documentation.
 - Check `Makefile` for more commands
 
   ```bash
