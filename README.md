@@ -115,33 +115,13 @@ JWT_SECRET="t3st1234"
 
 - Install **`PostgreSQL`** **`golang  >= 1.21`** **`gosec`** & **`swag`**
 - Rename `.env.example` to `.env` and fill it with your environment values
-- Migrate db & seed some demo data
-
-  ```bash
-  make migrate.up
-  make seed
-  ```
-
 - Run project by this command:
 
   ```bash
   make run
   ```
-
+  
 - Visit **`http://localhost:5000/api/v1/swagger`** for the API documentation.
-- Check `Makefile` for more commands
-
-  ```bash
-  # drop migration
-  make migrate.down
-
-  # force migration to specific version
-  migrate.force
-
-  # run test
-  make test
-  ...
-  ```
 
 ## ⚠️ License
 
