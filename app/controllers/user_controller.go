@@ -4,10 +4,12 @@ import (
 	pg "boilerplate/app/db"
 	"boilerplate/app/models"
 	"boilerplate/app/utils"
+
 	"github.com/gofiber/fiber/v2"
 )
 
 func GetUsers(c *fiber.Ctx) error {
+	// Get users
 	var users []models.User
 	pg.DB.Find(&users)
 
@@ -19,6 +21,7 @@ func GetUsers(c *fiber.Ctx) error {
 }
 
 func GetUser(c *fiber.Ctx) error {
+	// Get user
 	var user models.User
 	if err := pg.DB.First(&user, c.Params("id")).Error; err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(utils.Response{
