@@ -29,16 +29,16 @@ For any fiber go application, just clone the repo & rename the application name.
 
 ## ⚡️ Quick start
 
-- Install **`docker`**, **`golang-migrate`** & **`swag`**
+- Install **`swag`** and **`postgresql`**
 - Rename `.env.example` to `.env`
+- Create new database in postgres, and enter the database name in `.env` file
 - Run project by this command:
 
   ```bash
-  make docker.run
+  make run
   ```
 
-- Visit **`http://localhost:5000`** or **`http://localhost:5000/swagger/`**
-- Stop `make docker.stop`
+- Visit **`http://localhost:8080`** or **`http://localhost:8080/api/v1/swagger`**
 
 ![APIs](docs/api_list.png)
 
@@ -104,7 +104,7 @@ DB_SSL_MODE=disable
 CORS_ALLOWED_ORIGINS=http://localhost:3000
 
 # JWT settings
-JWT_SECRET="t3st1234"
+JWT_SECRET=your-secret-key
 ```
 
 ## 🔨 Docker development
