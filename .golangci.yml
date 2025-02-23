@@ -1,0 +1,46 @@
+# Options for analysis running
+run:
+  # Timeout for analysis, e.g. 30s, 5m, default is 1m
+  timeout: 5m
+
+  # Include test files or not, default is true
+  tests: true
+
+  # Allow multiple parallel golangci-lint instances running
+  allow-parallel-runners: false
+
+# Output configuration options
+output:
+  # Format: colored-line-number|line-number|json|tab|checkstyle|code-climate|junit-xml|github-actions
+  formats: colored-line-number
+
+# Linters settings
+linters:
+  disable-all: true
+  enable:
+    - errcheck
+    - gosimple
+    - govet
+    - ineffassign
+    - staticcheck
+    - typecheck
+    - unused
+    - gosec
+    - gofmt
+    - goimports
+    - revive
+    - misspell
+    - prealloc
+
+# Linter settings
+linters-settings:
+  errcheck:
+    check-type-assertions: true
+  govet:
+    shadow: true
+  gofmt:
+    simplify: true
+  goimports:
+    local-prefixes: github.com/radenadri/go-boilerplate
+  revive:
+    severity: warning

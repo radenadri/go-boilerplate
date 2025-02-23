@@ -1,0 +1,42 @@
+.git/
+.gitignore
+.env
+.env.*
+!.env.example
+
+# IDE specific
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Build and binary directories
+bin/
+dist/
+tmp/
+
+# Docker volumes
+docker/postgres-data/
+docker/redis-data/
+
+# Test files
+*_test.go
+*.test
+
+# Documentation
+docs/
+README.md
+LICENSE
+
+# Development tools
+.air.toml
+.golangci.yml
+Makefile
+
+# Log files
+*.log
+
+# macOS specific
+.DS_Store
+.AppleDouble
+.LSOverride

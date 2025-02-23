@@ -1,0 +1,47 @@
+# Go specific
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+
+# IDE specific
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment files
+.env
+
+# Dependency directories
+vendor/
+
+# Build and binary directories
+bin/
+dist/
+tmp/
+
+# Docker volumes
+docker/postgres-data/
+docker/redis-data/
+
+# Log files
+*.log
+
+# macOS specific
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Test binary, built with 'go test -c'
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Air live reload
+tmp/
