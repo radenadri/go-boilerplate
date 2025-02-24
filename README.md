@@ -10,6 +10,7 @@ A robust and scalable Go boilerplate for building modern web applications with b
 - [Getting Started](#getting-started)
 - [Project Structure](#project-structure)
 - [Configuration](#configuration)
+- [Makefile Commands](#makefile-commands)
 - [API Documentation](#api-documentation)
 - [Development](#development)
 - [Contributing](#contributing)
@@ -34,8 +35,7 @@ A robust and scalable Go boilerplate for building modern web applications with b
 - **Structured Logging**: High-performance logging with [Zap](https://github.com/uber-go/zap)
 - **Input Validation**: Request validation using [go-playground/validator](https://github.com/go-playground/validator)
 - **Error Handling**: Consistent error handling with custom error types
-- **Metrics**: Prometheus metrics integration for monitoring
-- **Tracing**: Distributed tracing with OpenTelemetry
+- **Monitoring**: Integrated monitoring with [Sentry](https://sentry.io)
 
 ### Security
 - **CORS**: Configurable CORS middleware
@@ -181,6 +181,130 @@ go tool cover -html=coverage.out
 | CORS_ORIGIN | Allowed CORS origins | * | No |
 | LOG_LEVEL | Logging level (debug/info/warn/error) | info | No |
 
+## Makefile Commands
+
+This project includes a Makefile to help with common development tasks. Here are the available commands:
+
+### Development Commands
+
+```bash
+# Start the application in development mode with hot reload
+make dev
+
+# Build the application
+make build
+
+# Run the application
+make run
+
+# Clean build artifacts
+make clean
+```
+
+### Database Commands
+
+```bash
+# Create a new migration
+make migrate-create name=migration_name
+
+# Run all pending migrations
+make migrate-up
+
+# Rollback the last migration
+make migrate-down
+
+# Show migration status
+make migrate-status
+```
+
+### Docker Commands
+
+```bash
+# Build and start all containers
+make docker-up
+
+# Stop all containers
+make docker-down
+
+# Build all containers
+make docker-build
+
+# Show container logs
+make docker-logs
+
+# Remove all containers and volumes
+make docker-clean
+```
+
+### Testing Commands
+
+```bash
+# Run all tests
+make test
+
+# Run tests with coverage
+make test-coverage
+
+# Run specific tests
+make test-file file=path/to/test/file
+
+# Run linter
+make lint
+```
+
+### Tools and Dependencies
+
+```bash
+# Install development tools (air, swag, etc.)
+make install-tools
+
+# Update dependencies
+make deps-update
+
+# Tidy go.mod
+make deps-tidy
+```
+
+### Documentation Commands
+
+```bash
+# Generate Swagger documentation
+make swagger
+
+# Generate and view test coverage
+make coverage-html
+```
+
+### Helper Commands
+
+```bash
+# Show all available make commands
+make help
+
+# Format all Go files
+make fmt
+
+# Run security checks
+make security-check
+
+# Generate mocks for testing
+make generate-mocks
+```
+
+Example usage:
+
+```bash
+# Start development with hot reload
+make dev
+
+# Create a new migration
+make migrate-create name=add_users_table
+
+# Run tests with coverage and view report
+make test-coverage
+make coverage-html
+```
+
 ## API Documentation
 
 ### Swagger Documentation
@@ -198,7 +322,7 @@ To generate/update Swagger documentation:
 go install github.com/swaggo/swag/cmd/swag@latest
 
 # Generate documentation
-swag init -g cmd/api/main.go
+make swag
 ```
 
 ### Authentication Endpoints
@@ -209,23 +333,10 @@ POST /api/v1/auth/register
 Content-Type: application/json
 
 {
+    "name": "User Example",
     "username": "user123",
     "email": "user@example.com",
     "password": "password123"
-}
-```
-
-Response:
-```json
-{
-    "status": "success",
-    "message": "User registered successfully",
-    "data": {
-        "id": "uuid",
-        "username": "user123",
-        "email": "user@example.com",
-        "created_at": "2024-02-24T12:00:00Z"
-    }
 }
 ```
 
@@ -235,21 +346,8 @@ POST /api/v1/auth/login
 Content-Type: application/json
 
 {
-    "email": "user@example.com",
+    "username": "user123",
     "password": "password123"
-}
-```
-
-Response:
-```json
-{
-    "status": "success",
-    "message": "Login successful",
-    "data": {
-        "token": "eyJhbGciOiJIUzI1NiIs...",
-        "token_type": "Bearer",
-        "expires_in": 86400
-    }
 }
 ```
 
@@ -257,30 +355,8 @@ Response:
 
 #### Get All Users
 ```http
-GET /api/v1/users
+GET /api/v1/users/page=1&perPage=5
 Authorization: Bearer <token>
-```
-
-Response:
-```json
-{
-    "status": "success",
-    "data": {
-        "users": [
-            {
-                "id": "uuid",
-                "username": "user123",
-                "email": "user@example.com",
-                "created_at": "2024-02-24T12:00:00Z"
-            }
-        ],
-        "pagination": {
-            "current_page": 1,
-            "per_page": 10,
-            "total": 100
-        }
-    }
-}
 ```
 
 ## Development
