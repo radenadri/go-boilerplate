@@ -10,7 +10,6 @@ A robust and scalable Go boilerplate for building modern web applications with b
 - [Getting Started](#getting-started)
 - [Project Structure](#project-structure)
 - [Configuration](#configuration)
-- [Makefile Commands](#makefile-commands)
 - [API Documentation](#api-documentation)
 - [Development](#development)
 - [Contributing](#contributing)
@@ -60,8 +59,8 @@ A robust and scalable Go boilerplate for building modern web applications with b
 ## Prerequisites
 
 - Go 1.21 or higher
-- Docker 24.0 or higher
-- Docker Compose v2.0 or higher
+- Docker
+- Docker Compose
 - PostgreSQL 15
 - Redis 7.0
 
@@ -110,52 +109,23 @@ go install github.com/cosmtrek/air@latest
 
 3. Start the application with hot reload:
 ```bash
-air
-```
-
-### Running Tests
-
-```bash
-# Run all tests
-go test ./...
-
-# Run tests with coverage
-go test -cover ./...
-
-# Generate coverage report
-go test -coverprofile=coverage.out ./...
-go tool cover -html=coverage.out
+make dev
 ```
 
 ## Project Structure
 
 ```
 .
-├── cmd/                    # Application entry points
-│   └── api/               # API server
-│       └── main.go        # Main application file
-├── config/                # Configuration
-│   ├── config.go          # Configuration structs
-│   └── database.go        # Database configuration
-├── internal/              # Private application code
-│   ├── delivery/          # HTTP handlers
-│   │   ├── http/         # HTTP transport layer
-│   │   └── dto/          # Data Transfer Objects
-│   ├── domain/           # Business logic and entities
-│   │   ├── entity/       # Domain entities
-│   │   ├── repository/   # Repository interfaces
-│   │   └── service/      # Service interfaces
-│   ├── repository/       # Repository implementations
-│   └── service/          # Service implementations
-├── migrations/           # Database migrations
-├── pkg/                  # Public libraries
-│   ├── auth/            # Authentication package
-│   ├── database/        # Database utilities
-│   ├── logger/          # Logging utilities
-│   └── validator/       # Validation utilities
-├── scripts/             # Build and deployment scripts
-├── test/                # Test utilities and fixtures
-└── web/                # Web assets and templates
+├── cmd/                # Application entry points
+├── config/            # Configuration setup
+├── internal/          # Private application code
+│   ├── delivery/      # HTTP handlers and DTOs
+│   ├── domain/        # Business logic and entities
+│   ├── repositories/  # Data access layer
+│   └── services/      # Business logic implementation
+├── migrations/        # Database migrations
+├── pkg/               # Public libraries
+└── utils/             # Utility functions
 ```
 
 ## Configuration
@@ -167,7 +137,8 @@ go tool cover -html=coverage.out
 | APP_NAME | Application name | Golang Boilerplate | No |
 | APP_ENV | Environment (development/production) | development | No |
 | APP_PORT | HTTP server port | 8080 | No |
-| APP_URL | Application URL | http://localhost:8080 | No |
+| APP_TIMEZONE | Default setting for app timezone | UTC | No |
+| APP_API_VERSION | Default version for API service | v1 | No |
 | DB_HOST | Database host | 127.0.0.1 | Yes |
 | DB_PORT | Database port | 5432 | Yes |
 | DB_NAME | Database name | go_boilerplate | Yes |
@@ -176,134 +147,11 @@ go tool cover -html=coverage.out
 | REDIS_HOST | Redis host | 127.0.0.1 | Yes |
 | REDIS_PORT | Redis port | 6379 | Yes |
 | REDIS_PASSWORD | Redis password | - | No |
+| REDIS_DB | Redis Database | - | YES |
 | JWT_SECRET | JWT signing key | - | Yes |
 | JWT_EXPIRY | JWT expiry time in hours | 24 | No |
-| CORS_ORIGIN | Allowed CORS origins | * | No |
-| LOG_LEVEL | Logging level (debug/info/warn/error) | info | No |
-
-## Makefile Commands
-
-This project includes a Makefile to help with common development tasks. Here are the available commands:
-
-### Development Commands
-
-```bash
-# Start the application in development mode with hot reload
-make dev
-
-# Build the application
-make build
-
-# Run the application
-make run
-
-# Clean build artifacts
-make clean
-```
-
-### Database Commands
-
-```bash
-# Create a new migration
-make migrate-create name=migration_name
-
-# Run all pending migrations
-make migrate-up
-
-# Rollback the last migration
-make migrate-down
-
-# Show migration status
-make migrate-status
-```
-
-### Docker Commands
-
-```bash
-# Build and start all containers
-make docker-up
-
-# Stop all containers
-make docker-down
-
-# Build all containers
-make docker-build
-
-# Show container logs
-make docker-logs
-
-# Remove all containers and volumes
-make docker-clean
-```
-
-### Testing Commands
-
-```bash
-# Run all tests
-make test
-
-# Run tests with coverage
-make test-coverage
-
-# Run specific tests
-make test-file file=path/to/test/file
-
-# Run linter
-make lint
-```
-
-### Tools and Dependencies
-
-```bash
-# Install development tools (air, swag, etc.)
-make install-tools
-
-# Update dependencies
-make deps-update
-
-# Tidy go.mod
-make deps-tidy
-```
-
-### Documentation Commands
-
-```bash
-# Generate Swagger documentation
-make swagger
-
-# Generate and view test coverage
-make coverage-html
-```
-
-### Helper Commands
-
-```bash
-# Show all available make commands
-make help
-
-# Format all Go files
-make fmt
-
-# Run security checks
-make security-check
-
-# Generate mocks for testing
-make generate-mocks
-```
-
-Example usage:
-
-```bash
-# Start development with hot reload
-make dev
-
-# Create a new migration
-make migrate-create name=add_users_table
-
-# Run tests with coverage and view report
-make test-coverage
-make coverage-html
-```
+| CORS_ALLOWED_ORIGINS | Allowed CORS origins | * | No |
+| SENTRY_DSN | Send the error to Sentry | - | Yes |
 
 ## API Documentation
 
@@ -386,7 +234,7 @@ This project follows the official Go style guide and best practices:
 go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 
 # Run linter
-golangci-lint run
+make lint
 ```
 
 ## Contributing
