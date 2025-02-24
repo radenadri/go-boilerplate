@@ -142,12 +142,6 @@ GET /api/v1/users
 Authorization: Bearer <token>
 ```
 
-#### Get User by Username
-```http
-GET /api/v1/users/:username
-Authorization: Bearer <token>
-```
-
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
