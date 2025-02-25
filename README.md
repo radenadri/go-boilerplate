@@ -1,3 +1,5 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/radenadri/go-boilerplate/badge)](https://www.codefactor.io/repository/github/radenadri/go-boilerplate)
+
 # Go Boilerplate
 
 A robust and scalable Go boilerplate for building modern web applications with best practices and essential features pre-configured. This boilerplate follows clean architecture principles and includes production-ready features out of the box.
@@ -236,14 +238,6 @@ go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 # Run linter
 make lint
 ```
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
 
 ## License
 
