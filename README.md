@@ -212,18 +212,6 @@ Authorization: Bearer <token>
 
 ## Development
 
-### Adding New Features
-
-1. Create a new branch:
-```bash
-git checkout -b feature/your-feature-name
-```
-
-2. Implement your changes following the project structure
-3. Add tests for new functionality
-4. Update documentation if necessary
-5. Submit a pull request
-
 ### Code Style
 
 This project follows the official Go style guide and best practices:
