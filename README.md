@@ -1,4 +1,5 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/radenadri/go-boilerplate/badge)](https://www.codefactor.io/repository/github/radenadri/go-boilerplate)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/599d7c1eaaa444908f077e801d7746cf)](https://app.codacy.com/gh/radenadri/go-boilerplate/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 # Go Boilerplate
 
